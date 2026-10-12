@@ -1,0 +1,174 @@
+<!-- 
+JavaScript Practical Exam
+Product Page with CRUD Operations
+
+Project Objective:
+
+The objective of this project is to create a product page that allows users to perform CRUD operations (Create, Read, Update, Delete) on a list of products. The project aims to provide hands-on experience in web development with a focus on JavaScript and local storage.
+
+
+
+Project Requirements : 
+
+​
+
+1. HTML Structure (5 points) :
+
+​- Create an HTML file with the necessary structure for the product page.
+
+​- Include an input form to add new products and a dynamic list to display existing products. - make input field title, price, image, category
+
+
+
+​2. Adding Products (5 points) :
+
+​- Implement a function (`addProduct`) to collect information from users when adding a new ​product.
+
+​- Validate that both product name and price are provided before adding a product. - Format the product data and add it to the product list dynamically.
+
+
+
+3. Displaying Products (5 points) :
+
+​- Create a function (`addProductToList`) to display products on the page dynamically. - Display each product with its name price, image category
+
+
+
+​4. Local Storage (10 points) :
+
+​- Utilize local storage to persist product data even when the page is refreshed.
+
+​- Implement functions to load product data from local storage on page load and save data when products are added or modified.
+
+
+
+​5. Editing Products (5 points) :
+
+​- Develop a function (`editProduct`) to allow users to edit existing products. - Identify a unique identifier for each product to ensure accurate editing.
+
+
+
+​6. Deleting Products (5 points) :
+
+​- Implement a function (`deleteProduct`) to allow users to remove products from the list. - Update the page dynamically when a product is deleted.
+
+
+
+7. Sorting searching and filtering (10 points) :
+
+​- Add sorting feature by price with low to high and high to low
+
+​- Add searching feature by title
+
+​- Add filter feature by category -
+
+
+
+8. User Interaction (5 points) :
+
+​- Ensure that input fields are cleared after successfully adding a new product - make good UI 
+-->
+
+
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <title>Products Zone</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS v5.3.8 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+        <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaml4wVBtfbn-5BGtD31rGQTK--dTNjw_1Ak3KjPypKA&s">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container">
+                <a class="navbar-brand d-flex justify-content-start" href="#">
+                    <h2 style="font-size: 18px;"><span class="fs-1 ps-2 pe-2 rounded-5 text-light"
+                            style="background-color: blueviolet;">P</span>roducts</h2>
+                    <h3 style="font-size: 18px;"><span class="text-secondary fs-2">Z</span>one</h3>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./homePage.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./productView.html">View</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./productAdd.html">Add</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./productCart.html">Cart</a>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div> -->
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Add Product -->
+        <section class="addProduct">
+            <div class="container shadow mt-4 p-3">
+                <div class="row gy-3 mt-3">
+                    <div class="col-md-6">
+                        <form id="productForm">
+                            <div class="mb-3">
+                                <label class="form-label">Product Title</label>
+                                <input type="text" class="form-control" id="productTitle">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Price</label>
+                                <input type="number" class="form-control" id="productPrice">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Image URL</label>
+                                <input type="text" class="form-control" id="productImg">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Category</label>
+                                <textarea class="form-control" id="productCategory"></textarea>
+                            </div>
+                            <button type="submit" class="btn text-light" style="background-color: blueviolet;"
+                                >Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="Display">
+            <div class="container m-5 gy-3" id="display">
+            </div>
+        </section>
+
+    </main>
+    <footer>
+
+    </footer>
+    <!-- Bootstrap JavaScript Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>

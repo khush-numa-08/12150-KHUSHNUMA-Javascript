@@ -1,1 +1,0 @@
-const displayProduct = document.getElementById('displayProduct');
