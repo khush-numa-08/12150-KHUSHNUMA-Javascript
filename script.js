@@ -31,11 +31,9 @@ productForm.addEventListener("submit", (e) => {
     }
 
     list.push(obj);
-
     localStorage.setItem("Products", JSON.stringify(list));
-
+    
     productForm.reset();
-
     handleDisplay();
 });
 
